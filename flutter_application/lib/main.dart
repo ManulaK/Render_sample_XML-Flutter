@@ -1,3 +1,4 @@
+// main.dart
 import 'package:flutter/material.dart';
 import 'package:xml/xml.dart' as xml;
 
@@ -13,56 +14,101 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // Remove the debug banner
       debugShowCheckedModeBanner: false,
+      title: 'Display Xml file',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: XmlDataDemo(),
+      home: const HomeScreen(),
     );
   }
 }
 
-class XmlDataDemo extends StatefulWidget {
-  const XmlDataDemo({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<XmlDataDemo> createState() => _XmlDataDemoState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _XmlDataDemoState extends State<XmlDataDemo> {
-  List _students = [];
+class _HomeScreenState extends State<HomeScreen> {
+  // This list will be displayed in the ListView
+  List _employees = [];
 
-  void _xmlData() async {
-    final dataList = [];
+  // This function will be triggered when the app starts
+  void _loadData() async {
+    final temporaryList = [];
 
-    const studentXml = '''<ns0:Data 
-    xmlns:ns0="urn:schemas-microsoft-com:office:spreadsheet" 
-    xmlns:ns1="[http://www.w3.org/TR/REC-html40"](http://www.w3.org/TR/REC-html40%22) 
-    ns0:Type="String">
-    <ns1:Font ns1:Color="#808080">Here's </ns1:Font>
-    <ns1:Font ns1:Color="#808080">your</ns1:Font>
-    <ns1:Font ns1:Color="#808080"> </ns1:Font>
-    <ns1:Font ns1:Color="#595959">first</ns1:Font>
-    <ns1:Font ns1:Color="#808080"> </ns1:Font>
-    <ns1:Font ns1:Color="#404040">word</ns1:Font>
-    <ns1:Font ns1:Color="#808080"> </ns1:Font>
-    <ns1:Font ns1:Color="#262626">to</ns1:Font>
-    <ns1:Font ns1:Color="#808080"> </ns1:Font>
-    <ns1:Font ns1:Color="#0D0D0D">learn</ns1:Font>
-    <ns1:Font ns1:Color="#808080">:</ns1:Font>ns1:Font\n{</ns1:Font>
-    <ns1:Font ns1:Color="#FF0000">اللَّه</ns1:Font>ns1:Font}\nis God's name, very much like you have a given name.  While some may translate {</ns1:Font>
-    <ns1:Font ns1:Color="#00FF00">اللَّه</ns1:Font>ns1:Font} to "God", this may not be the most accurate.  Because "God" is reserved for the word </ns1:Font>
-    <ns1:Font ns1:Color="#0000FF">إِلَه</ns1:Font>ns1:Font, which we will learn later in this lesson.  So in the simplest terms, "God" (</ns1:Font>إِلَ<ns1:Font ns1:Color="#FF0000">ه</ns1:Font>ns1:Font) is more like the 'type' (analogous to humankind as our type) while "</ns1:Font>
-    <ns1:Font ns1:Color="#FF0000">A</ns1:Font>
-    <ns1:Font ns1:Color="#00FF00">ll</ns1:Font><ns1:Font ns1:Color="#0000FF">a</ns1:Font>ns1:I<ns1:Font ns1:Color="#FF0000">h</ns1:Font>
-    </ns1:I>ns1:Font" ({اللَّه}) is the actual 'name' (very much like the everyday names "David", "Adam", "Jacob"...etc)</ns1:Font>
-    </ns0:Data>''';
+    // in real life, this is usually fetched from an API or from an XML file
+    // In this example, we use this XML document to simulate the API response
+    const employeeXml = '''<?xml version="1.0"?>
+    <employees>
+      <employee>
+        <name>Spiderman</name>
+        <salary>5000</salary>
+      </employee>
+      <employee>
+        <name>Dr. Strange</name>
+        <salary>6000</salary>
+      </employee>
+      <employee>
+        <name>Thanos</name>
+        <salary>7000</salary>
+      </employee>
+      <employee>
+        <name>Iron Man</name>
+        <salary>8000</salary>
+      </employee>
+      <employee>
+        <name>bat man</name>
+        <salary>0.5</salary>
+      </employee>
+    </employees>''';
 
-    final document = xml.XmlDocument.parse(studentXml);
+    // Parse XML data
+    final document = xml.XmlDocument.parse(employeeXml);
+    final employeesNode = document.findElements('employees').first;
+    final employees = employeesNode.findElements('employee');
+    // loop through the document and extract values
+    for (final employee in employees) {
+      final name = employee.findElements('name').first.text;
+      final salary = employee.findElements('salary').first.text;
+      temporaryList.add({'name': name, 'salary': salary});
+    }
+
+    // Update the UI
+    setState(() {
+      _employees = temporaryList;
+    });
+  }
+
+  // Call the _loadData() function when the app starts
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      appBar: AppBar(title: const Text('display xml file')),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        // list of employees
+        child: ListView.builder(
+          itemBuilder: (context, index) => Card(
+            key: ValueKey(_employees[index]['name']),
+            margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+            color: Colors.greenAccent.shade400,
+            elevation: 4,
+            child: ListTile(
+              title: Text(_employees[index]['name']),
+              subtitle: Text("Salary: \$${_employees[index]['salary']}"),
+            ),
+          ),
+          itemCount: _employees.length,
+        ),
+      ),
+    );
   }
 }

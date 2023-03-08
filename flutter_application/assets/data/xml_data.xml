@@ -1,22 +1,32 @@
-<ns0:Data 
-    xmlns:ns0="urn:schemas-microsoft-com:office:spreadsheet" 
-    xmlns:ns1="[http://www.w3.org/TR/REC-html40"](http://www.w3.org/TR/REC-html40%22) 
-    ns0:Type="String">
-<ns1:Font ns1:Color="#808080">Here's </ns1:Font>
-<ns1:Font ns1:Color="#808080">your</ns1:Font>
-<ns1:Font ns1:Color="#808080"> </ns1:Font>
-<ns1:Font ns1:Color="#595959">first</ns1:Font>
-<ns1:Font ns1:Color="#808080"> </ns1:Font>
-<ns1:Font ns1:Color="#404040">word</ns1:Font>
-<ns1:Font ns1:Color="#808080"> </ns1:Font>
-<ns1:Font ns1:Color="#262626">to</ns1:Font>
-<ns1:Font ns1:Color="#808080"> </ns1:Font>
-<ns1:Font ns1:Color="#0D0D0D">learn</ns1:Font>
-<ns1:Font ns1:Color="#808080">:</ns1:Font>ns1:Font\n{</ns1:Font>
-<ns1:Font ns1:Color="#FF0000">اللَّه</ns1:Font>ns1:Font}\nis God's name, very much like you have a given name.  While some may translate {</ns1:Font>
-<ns1:Font ns1:Color="#00FF00">اللَّه</ns1:Font>ns1:Font} to "God", this may not be the most accurate.  Because "God" is reserved for the word </ns1:Font>
-<ns1:Font ns1:Color="#0000FF">إِلَه</ns1:Font>ns1:Font, which we will learn later in this lesson.  So in the simplest terms, "God" (</ns1:Font>إِلَ<ns1:Font ns1:Color="#FF0000">ه</ns1:Font>ns1:Font) is more like the 'type' (analogous to humankind as our type) while "</ns1:Font>
-<ns1:Font ns1:Color="#FF0000">A</ns1:Font>
-<ns1:Font ns1:Color="#00FF00">ll</ns1:Font><ns1:Font ns1:Color="#0000FF">a</ns1:Font>ns1:I<ns1:Font ns1:Color="#FF0000">h</ns1:Font>
-</ns1:I>ns1:Font" ({اللَّه}) is the actual 'name' (very much like the everyday names "David", "Adam", "Jacob"...etc)</ns1:Font>
-</ns0:Data>
+<breakfast_menu>
+    <food>
+        <name>Belgian Waffles</name>
+        <price>$5.95</price>
+        <description>Two of our famous Belgian Waffles with plenty of real maple syrup</description>
+        <calories>650</calories>
+    </food>
+    <food>
+        <name>Strawberry Belgian Waffles</name>
+        <price>$7.95</price>
+        <description>Light Belgian waffles covered with strawberries and whipped cream</description>
+        <calories>900</calories>
+    </food>
+    <food>
+        <name>Berry-Berry Belgian Waffles</name>
+        <price>$8.95</price>
+        <description>Light Belgian waffles covered with an assortment of fresh berries and whipped cream</description>
+        <calories>900</calories>
+    </food>
+    <food>
+        <name>French Toast</name>
+        <price>$4.50</price>
+        <description>Thick slices made from our homemade sourdough bread</description>
+        <calories>600</calories>
+    </food>
+    <food>
+        <name>Homestyle Breakfast</name>
+        <price>$6.95</price>
+        <description>Two eggs, bacon or sausage, toast, and our ever-popular hash browns</description>
+        <calories>950</calories>
+    </food>
+</breakfast_menu>
